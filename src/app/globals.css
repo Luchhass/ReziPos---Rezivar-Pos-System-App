@@ -24,3 +24,23 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@layer base {
+  html,
+  body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+:root {
+  --tooltip-bg: #dddddd;
+}
+
+[class~="dark"] {
+  --tooltip-bg: #2d2d2d !important;
+}

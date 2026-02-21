@@ -1,0 +1,269 @@
+[
+  {
+    "order_id": "ORD-101",
+    "table": "5",
+    "waiter": "Leslie K.",
+    "timestamp": "2023-01-12T12:15:00Z",
+    "status": "completed",
+    "payment": { "method": "E-Wallet", "tip_amount": 2.5 },
+    "items": [
+      { "item_id": "item-01", "name": "Burger", "price": 10.0, "qt": 2 }
+    ]
+  },
+  {
+    "order_id": "ORD-102",
+    "table": "2",
+    "waiter": "Ron S.",
+    "timestamp": "2023-02-14T20:00:00Z",
+    "status": "completed",
+    "payment": { "method": "Cash", "tip_amount": 15.0 },
+    "items": [
+      { "item_id": "item-02", "name": "Fillet Steak", "price": 28.0, "qt": 2 },
+      { "item_id": "item-03", "name": "Wine", "price": 45.0, "qt": 1 }
+    ]
+  },
+  {
+    "order_id": "ORD-103",
+    "table": "8",
+    "waiter": "April L.",
+    "timestamp": "2023-06-20T14:30:00Z",
+    "status": "completed",
+    "payment": { "method": "Debit Card", "tip_amount": 5.0 },
+    "items": [
+      { "item_id": "item-04", "name": "Ice Tea", "price": 3.5, "qt": 10 }
+    ]
+  },
+  {
+    "order_id": "ORD-104",
+    "table": "4",
+    "waiter": "Tom H.",
+    "timestamp": "2023-12-24T21:00:00Z",
+    "status": "completed",
+    "payment": { "method": "Credit Card", "tip_amount": 25.0 },
+    "items": [
+      {
+        "item_id": "item-05",
+        "name": "Christmas Special",
+        "price": 55.0,
+        "qt": 4
+      }
+    ]
+  },
+  {
+    "order_id": "ORD-201",
+    "table": "1",
+    "waiter": "Leslie K.",
+    "timestamp": "2024-01-05T13:00:00Z",
+    "status": "completed",
+    "payment": { "method": "E-Wallet", "tip_amount": 3.0 },
+    "items": [
+      { "item_id": "item-01", "name": "Burger", "price": 10.0, "qt": 5 }
+    ]
+  },
+  {
+    "order_id": "ORD-202",
+    "table": "3",
+    "waiter": "Ron S.",
+    "timestamp": "2024-03-15T19:00:00Z",
+    "status": "completed",
+    "payment": { "method": "Cash", "tip_amount": 10.0 },
+    "items": [{ "item_id": "item-06", "name": "Pasta", "price": 15.0, "qt": 8 }]
+  },
+  {
+    "order_id": "ORD-203",
+    "table": "7",
+    "waiter": "April L.",
+    "timestamp": "2024-05-20T12:00:00Z",
+    "status": "completed",
+    "payment": { "method": "Debit Card", "tip_amount": 5.5 },
+    "items": [
+      { "item_id": "item-07", "name": "Roast Chicken", "price": 18.0, "qt": 12 }
+    ]
+  },
+  {
+    "order_id": "ORD-204",
+    "table": "9",
+    "waiter": "Tom H.",
+    "timestamp": "2024-07-10T20:30:00Z",
+    "status": "completed",
+    "payment": { "method": "Credit Card", "tip_amount": 20.0 },
+    "items": [
+      {
+        "item_id": "item-08",
+        "name": "Seafood Platter",
+        "price": 85.0,
+        "qt": 3
+      }
+    ]
+  },
+  {
+    "order_id": "ORD-205",
+    "table": "2",
+    "waiter": "Leslie K.",
+    "timestamp": "2024-08-15T18:00:00Z",
+    "status": "completed",
+    "payment": { "method": "E-Wallet", "tip_amount": 12.0 },
+    "items": [
+      {
+        "item_id": "item-09",
+        "name": "Chocolate Lava Cake",
+        "price": 9.5,
+        "qt": 20
+      }
+    ]
+  },
+  {
+    "order_id": "ORD-206",
+    "table": "5",
+    "waiter": "Ron S.",
+    "timestamp": "2024-08-20T14:00:00Z",
+    "status": "completed",
+    "payment": { "method": "Cash", "tip_amount": 0.0 },
+    "items": [
+      { "item_id": "item-01", "name": "Burger", "price": 10.0, "qt": 15 }
+    ]
+  },
+  {
+    "order_id": "ORD-207",
+    "table": "11",
+    "waiter": "April L.",
+    "timestamp": "2024-11-12T20:45:00Z",
+    "status": "completed",
+    "payment": { "method": "Debit Card", "tip_amount": 8.0 },
+    "items": [
+      { "item_id": "item-10", "name": "Miso Soup", "price": 4.5, "qt": 10 }
+    ]
+  },
+  {
+    "order_id": "ORD-208",
+    "table": "4",
+    "waiter": "Tom H.",
+    "timestamp": "2024-12-31T23:30:00Z",
+    "status": "completed",
+    "payment": { "method": "Credit Card", "tip_amount": 50.0 },
+    "items": [
+      { "item_id": "item-11", "name": "Champagne", "price": 120.0, "qt": 2 }
+    ]
+  },
+  {
+    "order_id": "ORD-301",
+    "table": "6",
+    "waiter": "Leslie K.",
+    "timestamp": "2025-01-15T19:30:00Z",
+    "status": "completed",
+    "payment": { "method": "Cash", "tip_amount": 10.0 },
+    "items": [
+      {
+        "item_id": "item-12",
+        "name": "Spaghetti Carbonara",
+        "price": 16.0,
+        "qt": 25
+      }
+    ]
+  },
+  {
+    "order_id": "ORD-302",
+    "table": "8",
+    "waiter": "Ron S.",
+    "timestamp": "2025-03-10T12:00:00Z",
+    "status": "completed",
+    "payment": { "method": "E-Wallet", "tip_amount": 5.0 },
+    "items": [
+      { "item_id": "item-01", "name": "Burger", "price": 10.0, "qt": 10 }
+    ]
+  },
+  {
+    "order_id": "ORD-303",
+    "table": "12",
+    "waiter": "April L.",
+    "timestamp": "2025-06-15T15:00:00Z",
+    "status": "completed",
+    "payment": { "method": "Debit Card", "tip_amount": 15.0 },
+    "items": [
+      { "item_id": "item-13", "name": "Salad", "price": 12.0, "qt": 30 }
+    ]
+  },
+  {
+    "order_id": "ORD-304",
+    "table": "1",
+    "waiter": "Tom H.",
+    "timestamp": "2025-07-04T13:20:00Z",
+    "status": "completed",
+    "payment": { "method": "Credit Card", "tip_amount": 12.5 },
+    "items": [
+      { "item_id": "item-14", "name": "Lobster", "price": 48.0, "qt": 15 }
+    ]
+  },
+  {
+    "order_id": "ORD-305",
+    "table": "3",
+    "waiter": "Leslie K.",
+    "timestamp": "2025-09-20T19:00:00Z",
+    "status": "completed",
+    "payment": { "method": "E-Wallet", "tip_amount": 2.0 },
+    "items": [
+      { "item_id": "item-06", "name": "Pasta", "price": 15.0, "qt": 10 }
+    ]
+  },
+  {
+    "order_id": "ORD-306",
+    "table": "9",
+    "waiter": "Ron S.",
+    "timestamp": "2025-12-24T21:50:00Z",
+    "status": "completed",
+    "payment": { "method": "Cash", "tip_amount": 35.0 },
+    "items": [
+      { "item_id": "item-02", "name": "Fillet Steak", "price": 28.0, "qt": 40 }
+    ]
+  },
+  {
+    "order_id": "ORD-401",
+    "table": "10",
+    "waiter": "April L.",
+    "timestamp": "2026-01-05T12:00:00Z",
+    "status": "completed",
+    "payment": { "method": "Debit Card", "tip_amount": 4.5 },
+    "items": [
+      { "item_id": "item-15", "name": "Dragon Roll", "price": 18.0, "qt": 18 }
+    ]
+  },
+  {
+    "order_id": "ORD-402",
+    "table": "2",
+    "waiter": "Tom H.",
+    "timestamp": "2026-02-14T20:15:00Z",
+    "status": "completed",
+    "payment": { "method": "Credit Card", "tip_amount": 25.0 },
+    "items": [
+      { "item_id": "item-02", "name": "Fillet Steak", "price": 28.0, "qt": 20 },
+      {
+        "item_id": "item-09",
+        "name": "Chocolate Lava Cake",
+        "price": 9.5,
+        "qt": 15
+      }
+    ]
+  },
+  {
+    "order_id": "ORD-403",
+    "table": "5",
+    "waiter": "Leslie K.",
+    "timestamp": "2026-02-18T21:15:00Z",
+    "status": "completed",
+    "payment": { "method": "Cash", "tip_amount": 5.0 },
+    "items": [
+      { "item_id": "item-16", "name": "Roast Beef", "price": 22.0, "qt": 22 }
+    ]
+  },
+  {
+    "order_id": "ORD-404",
+    "table": "7",
+    "waiter": "Ron S.",
+    "timestamp": "2026-02-19T14:45:00Z",
+    "status": "completed",
+    "payment": { "method": "E-Wallet", "tip_amount": 15.0 },
+    "items": [
+      { "item_id": "item-02", "name": "Fillet Steak", "price": 28.0, "qt": 35 }
+    ]
+  }
+]
