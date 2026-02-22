@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
       <body className={`${inter.variable} ${geistMono.variable} font-sans antialiased min-h-screen`}>
         <Header />
 
-        <div className="flex flex-col flex-1 md:ml-64 min-h-screen bg-[#f3f3f3] dark:bg-[#111315]">
+        <div className="mt-19 md:mt-0 flex flex-col flex-1 md:ml-64 min-h-screen bg-[#f3f3f3] dark:bg-[#111315]">
           <main className="flex-1">{children}</main>
         </div>
       </body>

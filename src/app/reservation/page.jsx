@@ -128,7 +128,7 @@ export default function ReservationPage() {
   };
 
   return (
-    <div className="h-[calc(100vh-76px)] mt-19 lg:h-screen lg:mt-0 inset-0 flex flex-col gap-8 overflow-hidden py-6 px-8 md:py-8 lg:py-10 select-none bg-[#f3f3f3] dark:bg-[#111315]">
+    <div className="h-[calc(100vh-76px)] lg:h-screeninset-0 flex flex-col gap-8 overflow-hidden py-6 px-8 md:py-8 lg:py-10 select-none bg-[#f3f3f3] dark:bg-[#111315]">
       {/* Reservations Header Section */}
       <header className="flex flex-col gap-8 justify-between shrink-0">
         <div className="flex justify-between items-center">
