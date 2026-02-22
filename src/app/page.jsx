@@ -49,7 +49,7 @@ export default function DashboardPage() {
   }, [filteredOrders, viewMode]);
 
   return (
-    <div className="flex flex-col gap-4 md:gap-5 lg:h-screen lg:overflow-hidden py-6 px-8 md:py-8 lg:py-10 font-sans tracking-tight">
+    <div className="mt-19 lg:mt-0 flex flex-col gap-4 md:gap-5 lg:h-screen lg:overflow-hidden py-6 px-8 md:py-8 lg:py-10 font-sans tracking-tight">
       {/* Header Section */}
       <div className="flex justify-between items-center shrink-0">
         <h1 className="text-[#121212] dark:text-[#ffffff] text-[25px] md:text-[28px] lg:text-[31px] tracking-tight">Dashboard</h1>
