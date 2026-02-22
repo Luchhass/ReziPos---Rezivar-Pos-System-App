@@ -18,7 +18,7 @@ export default function Header() {
   return (
     <>
       {/* Mobile Header Section */}
-      <header className="sticky top-0 w-full bg-[#f3f3f3] dark:bg-[#111315] text-[#121212] dark:text-[#ffffff] py-6 px-8 md:py-8 lg:py-10 flex items-center md:hidden z-60">
+      <header className="fixed top-0 w-full bg-[#f3f3f3] dark:bg-[#111315] text-[#121212] dark:text-[#ffffff] py-6 px-8 md:py-8 lg:py-10 flex items-center md:hidden z-60">
         <span className={`text-xl font-semibold tracking-wide transition-all duration-300 ${isOpen ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2 pointer-events-none"}`}>
           ReziPOS
         </span>

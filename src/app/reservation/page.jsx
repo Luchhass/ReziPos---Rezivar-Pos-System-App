@@ -48,56 +48,18 @@ export default function ReservationPage() {
     return `${day} / ${month} / ${year}`;
   };
 
-  useEffect(() => {
-    const handleClickOutside = (e) => { if (dateMenuRef.current && !dateMenuRef.current.contains(e.target)) setIsDateMenuOpen(false); };
-
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  const handleMouseDown = (e) => {
-    isDown.current = true; setDragged(false);
-
-    startX.current = e.pageX - sliderRef.current.offsetLeft;
-
-    startY.current = e.pageY - sliderRef.current.offsetTop;
-
-    scrollLeft.current = sliderRef.current.scrollLeft;
-
-    scrollTop.current = sliderRef.current.scrollTop;
-
-    sliderRef.current.style.scrollBehavior = "auto";
-  };
-
-  const handleMouseMove = (e) => {
-    if (!isDown.current) return;
-
-    e.preventDefault();
-
-    const walkX = (e.pageX - sliderRef.current.offsetLeft) - startX.current;
-
-    const walkY = (e.pageY - sliderRef.current.offsetTop) - startY.current;
-
-    if (Math.abs(walkX) > 5 || Math.abs(walkY) > 5) setDragged(true);
-
-    sliderRef.current.scrollLeft = scrollLeft.current - walkX;
-
-    sliderRef.current.scrollTop = scrollTop.current - walkY;
-  };
-
-  const stopDragging = () => { isDown.current = false; if (sliderRef.current) sliderRef.current.style.scrollBehavior = "smooth"; };
-
   const getPositionStyles = (start, end) => {
     const parseTime = (t) => {
       const [h, m] = t.split(":").map(Number);
 
       return (h < startHour ? h + 24 : h) + m / 60;
     };
-
     const s = parseTime(start), e = parseTime(end);
 
-    return { left: `${(s - startHour) * HOUR_COLUMN_WIDTH}px`, width: `${(e - s) * HOUR_COLUMN_WIDTH}px` };
+    return { 
+      left: `${(s - startHour) * HOUR_COLUMN_WIDTH}px`, 
+      width: `${(e - s) * HOUR_COLUMN_WIDTH}px` 
+    };
   };
 
   const getStatusClass = (status) => {
@@ -110,29 +72,75 @@ export default function ReservationPage() {
     }
   };
 
-  const currentFloorTables = useMemo(() => tables.filter((t) => t.floor === activeFloor), [tables, activeFloor]);
+  const currentFloorTables = useMemo(() => 
+    tables.filter((t) => t.floor === activeFloor), 
+  [tables, activeFloor]);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => { 
+      if (dateMenuRef.current && !dateMenuRef.current.contains(e.target)) setIsDateMenuOpen(false); 
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleStart = (clientX, clientY) => {
+    isDown.current = true;
+
+    setDragged(false);
+
+    startX.current = clientX - sliderRef.current.offsetLeft;
+
+    startY.current = clientY - sliderRef.current.offsetTop;
+
+    scrollLeft.current = sliderRef.current.scrollLeft;
+
+    scrollTop.current = sliderRef.current.scrollTop;
+
+    sliderRef.current.style.scrollBehavior = "auto";
+  };
+
+  const handleMove = (clientX, clientY) => {
+    if (!isDown.current) return;
+
+    const walkX = (clientX - sliderRef.current.offsetLeft) - startX.current;
+
+    const walkY = (clientY - sliderRef.current.offsetTop) - startY.current;
+
+    if (Math.abs(walkX) > 5 || Math.abs(walkY) > 5) setDragged(true);
+
+    sliderRef.current.scrollLeft = scrollLeft.current - walkX;
+
+    sliderRef.current.scrollTop = scrollTop.current - walkY;
+  };
+
+  const handleMouseDown = (e) => handleStart(e.pageX, e.pageY);
+  const handleMouseMove = (e) => { e.preventDefault(); handleMove(e.pageX, e.pageY); };
+  const handleTouchStart = (e) => handleStart(e.touches[0].pageX, e.touches[0].pageY);
+  const handleTouchMove = (e) => handleMove(e.touches[0].pageX, e.touches[0].pageY);
+
+  const stopDragging = () => {
+    isDown.current = false;
+
+    if (sliderRef.current) sliderRef.current.style.scrollBehavior = "smooth";
+  };
 
   return (
-    <div className="flex flex-col h-screen max-h-screen overflow-hidden py-6 px-8 md:py-8 lg:py-10 select-none bg-[#f3f3f3] dark:bg-[#111315]">  
+    <div className="h-[calc(100vh-76px)] mt-19 lg:h-screen lg:mt-0 inset-0 flex flex-col gap-8 overflow-hidden py-6 px-8 md:py-8 lg:py-10 select-none bg-[#f3f3f3] dark:bg-[#111315]">
       {/* Reservations Header Section */}
-      <header className="flex flex-col gap-8 justify-between shrink-0 mb-6">
+      <header className="flex flex-col gap-8 justify-between shrink-0">
         <div className="flex justify-between items-center">
-          <h1 className="text-[25px] font-bold md:text-[28px] lg:text-[31px] text-[#121212] dark:text-[#ffffff] tracking-tight">{restaurantConfig.brandName} Reservations</h1>
-          
-          <button className="bg-white text-black p-4 rounded-2xl hover:bg-[#cccccc] transition-all font-bold">New reservation</button>
-        </div>
-
-        <div className="flex justify-between items-center">
-          <div className="flex gap-4">
-            {floors.map((floor) => (
-              <button key={floor} onClick={() => setActiveFloor(floor)} className={`text-[#121212] dark:text-[#ffffff] px-6 py-2.5 text-sm font-medium transition-all rounded-xl border-2 ${activeFloor === floor ? "border-[#dddddd] dark:border-[#2d2d2d]" : "border-transparent hover:text-zinc-300"}`}>
-                {floor.toLowerCase()}
-              </button>
-            ))}
-          </div>
+          <h1 className="text-[#121212] dark:text-[#ffffff] text-[25px] md:text-[28px] lg:text-[31px] tracking-tight">
+             Reservations
+          </h1>
 
           <div className="relative" ref={dateMenuRef}>
-            <button onClick={() => setIsDateMenuOpen(!isDateMenuOpen)} className="flex items-center gap-3 bg-[#dddddd] dark:bg-[#2d2d2d] px-5 py-2.5 rounded-lg text-sm font-semibold border border-white/5 text-[#121212] dark:text-[#ffffff] hover:bg-[#d0cfcf] dark:hover:bg-[#242424] min-w-45 justify-between transition-colors">
+            <button 
+              onClick={() => setIsDateMenuOpen(!isDateMenuOpen)} 
+              className="flex items-center gap-3 bg-[#dddddd] dark:bg-[#2d2d2d] px-5 py-2.5 rounded-lg text-sm font-semibold border border-white/5 text-[#121212] dark:text-[#ffffff] hover:bg-[#d0cfcf] dark:hover:bg-[#242424] min-w-45 justify-between transition-colors"
+            >
               <div className="flex items-center gap-2 opacity-70"><Calendar size={16} /><span>{formatDateDisplay(selectedDate)}</span></div>
               
               <ChevronDown size={16} className={`transition-transform duration-200 ${isDateMenuOpen ? "rotate-180" : ""}`} />
@@ -151,21 +159,44 @@ export default function ReservationPage() {
             )}
           </div>
         </div>
+
+        <div className="flex justify-between items-center">
+          <div className="flex gap-2">
+            {floors.map((floor) => (
+              <button 
+                key={floor} 
+                onClick={() => setActiveFloor(floor)} 
+                className={`text-[#121212] dark:text-[#ffffff] px-3 py-2 text-[15px] md:text-[17px] lg:text-[20px] transition-all rounded-xl border-2 ${activeFloor === floor ? "border-[#dddddd] dark:border-[#2d2d2d]" : "border-transparent hover:text-zinc-300"}`}
+              >
+                {floor.toLowerCase()}
+              </button>
+            ))}
+          </div>
+        </div>
       </header>
 
+      <div className="w-full h-px bg-[#dddddd] dark:bg-[#2d2d2d]" />
+
       {/* Timeline Planner Grid Section */}
-      <div className="flex-1 border border-[#dddddd] dark:border-[#2d2d2d] rounded-2xl overflow-hidden flex flex-col">
+      <div className="lg:flex-1 border border-[#dddddd] dark:border-[#2d2d2d] rounded-2xl overflow-hidden flex flex-col">
         <div 
           ref={sliderRef} 
-          onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={stopDragging} onMouseLeave={stopDragging} 
+          onMouseDown={handleMouseDown} 
+          onMouseMove={handleMouseMove} 
+          onMouseUp={stopDragging} 
+          onMouseLeave={stopDragging}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={stopDragging}
           className="flex-1 overflow-auto cursor-grab active:cursor-grabbing scrollbar-hide touch-none"
           style={{ willChange: "scroll-position" }}
         >
           <div className="inline-block min-w-full w-fit align-middle">
             <div className="flex sticky top-0 z-40">
-              <div className="w-32 shrink-0 border-r border-b border-[#dddddd] dark:border-[#2d2d2d] h-14 sticky left-0 z-50 bg-[#f3f3f3] dark:bg-[#111315]" style={{ willChange: "transform" }} />
+              <div className=" w-20 md:w-24 lg:w-28 shrink-0 border-r border-b border-[#dddddd] dark:border-[#2d2d2d] h-14 sticky left-0 z-50 bg-[#f3f3f3] dark:bg-[#111315]" style={{ willChange: "transform" }} />
+              
               {Array.from({ length: totalHours + 1 }).map((_, i) => (
-                <div key={i} style={{ width: `${HOUR_COLUMN_WIDTH}px` }} className="shrink-0 flex justify-center items-center text-xs font-medium text-[#121212] dark:text-[#ffffff] border-r border-b border-[#dddddd] dark:border-[#2d2d2d] h-14 bg-[#f3f3f3] dark:bg-[#111315]">
+                <div key={i} style={{ width: `${HOUR_COLUMN_WIDTH}px` }} className=" shrink-0 flex justify-center items-center text-xs font-medium text-[#121212] dark:text-[#ffffff] border-r border-b border-[#dddddd] dark:border-[#2d2d2d] h-14 bg-[#f3f3f3] dark:bg-[#111315]">
                   {((startHour + i) % 24).toString().padStart(2, "0")}:00
                 </div>
               ))}
@@ -174,11 +205,12 @@ export default function ReservationPage() {
             <div className="flex flex-col">
               {currentFloorTables.map((tableObj) => {
                 const tableRes = groupedReservations[`${selectedDate}-${activeFloor}-${tableObj.id}`] || [];
-                
+
                 return (
-                  <div key={tableObj.id} className="group flex h-28 relative bg-[#f3f3f3] dark:bg-[#111315]">
+                  <div key={tableObj.id} className=" group flex h-20 md:h-24 lg:h-26 relative bg-[#f3f3f3] dark:bg-[#111315]">
+                    
                     <div 
-                      className="w-32 shrink-0 flex items-center justify-center text-sm font-medium text-[#121212] dark:text-[#ffffff] border-r border-b border-[#dddddd] dark:border-[#2d2d2d] sticky left-0 z-30 bg-[#f3f3f3] dark:bg-[#111315] group-last:border-b-0"
+                      className=" w-20 md:w-24 lg:w-28 shrink-0 flex items-center justify-center text-sm font-medium text-[#121212] dark:text-[#ffffff] border-r border-b border-[#dddddd] dark:border-[#2d2d2d] sticky left-0 z-30 bg-[#f3f3f3] dark:bg-[#111315] group-last:border-b-0"
                       style={{ willChange: "transform" }}
                     >
                       {tableObj.id}
@@ -194,10 +226,16 @@ export default function ReservationPage() {
                       </div>
 
                       {tableRes.map((res) => (
-                        <div key={res.uid} className={`absolute top-2 bottom-2 rounded-2xl flex flex-col justify-between transition-all px-4 py-2 z-10 ${getStatusClass(res.status)}`} style={getPositionStyles(res.assignment.startTime, res.assignment.endTime)}>
-                          <span className="text-[14px] font-bold md:text-[17px] truncate">{res.customer.fullName}</span>
+                        <div 
+                          key={res.uid} 
+                          className={`absolute top-1.5 bottom-1.5 md:top-2 md:bottom-2 rounded-2xl flex flex-col justify-between transition-all px-4 py-2 z-10 ${getStatusClass(res.status)}`} 
+                          style={getPositionStyles(res.assignment.startTime, res.assignment.endTime)}
+                        >
+                          <span className="text-[14px] font-bold md:text-[17px] truncate leading-tight">{res.customer.fullName}</span>
                           
-                          <div className="flex items-center gap-1.5 opacity-60 text-[14px] font-bold md:text-[17px]"><Users size={20} /> {res.assignment.partySize}</div>
+                          <div className="flex items-center gap-1.5 opacity-60 text-[14px] font-bold md:text-[17px]">
+                            <Users size={20} className="w-4 h-4 md:w-5 md:h-5" /> {res.assignment.partySize}
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -210,4 +248,4 @@ export default function ReservationPage() {
       </div>
     </div>
   );
-};
+}
